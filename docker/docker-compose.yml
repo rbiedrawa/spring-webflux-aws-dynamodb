@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  dynamodb:
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+    command: "-jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data"
+
+  dynamodb-admin:
+    image: "aaronshaf/dynamodb-admin"
+    container_name: dynamodb-admin
+    ports:
+      - "8001:8001"
+    environment:
+      AWS_ACCESS_KEY_ID: 'DUMMYIDEXAMPLE'
+      AWS_SECRET_ACCESS_KEY: 'DUMMYEXAMPLEKEY'
+      AWS_DEFAULT_REGION: 'eu-west-1'
+      DYNAMO_ENDPOINT: 'http://dynamodb:8000'
+    depends_on:
+      - dynamodb
+
+  awscli:
+    image: banst/awscli
+    container_name: awscli
+    depends_on:
+      - dynamodb
+    environment:
+      AWS_ACCESS_KEY_ID: 'DUMMYIDEXAMPLE'
+      AWS_SECRET_ACCESS_KEY: 'DUMMYEXAMPLEKEY'
+      AWS_DEFAULT_REGION: 'eu-west-1'
+    command:
+      'dynamodb create-table
+      --table-name users
+      --attribute-definitions AttributeName=userId,AttributeType=S AttributeName=email,AttributeType=S
+      --key-schema AttributeName=userId,KeyType=HASH AttributeName=email,KeyType=RANGE
+      --provisioned-throughput ReadCapacityUnits=10,WriteCapacityUnits=5
+      --endpoint-url http://dynamodb:8000'
+
+volumes:
+  dynamodb_data:
