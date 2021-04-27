@@ -35,8 +35,8 @@ services:
     command:
       'dynamodb create-table
       --table-name users
-      --attribute-definitions AttributeName=userId,AttributeType=S AttributeName=email,AttributeType=S
-      --key-schema AttributeName=userId,KeyType=HASH AttributeName=email,KeyType=RANGE
+      --attribute-definitions AttributeName=userId,AttributeType=S
+      --key-schema AttributeName=userId,KeyType=HASH
       --provisioned-throughput ReadCapacityUnits=10,WriteCapacityUnits=5
       --endpoint-url http://dynamodb:8000'
 
