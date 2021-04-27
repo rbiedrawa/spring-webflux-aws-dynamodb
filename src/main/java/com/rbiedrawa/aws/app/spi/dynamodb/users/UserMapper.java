@@ -1,8 +1,10 @@
-package com.rbiedrawa.aws.app.users;
+package com.rbiedrawa.aws.app.spi.dynamodb.users;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.rbiedrawa.aws.app.domain.users.User;
 
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
@@ -15,7 +17,10 @@ public interface UserMapper {
 	}
 
 	static User to(Map<String, AttributeValue> attributeMap) {
-		return new User(attributeMap.get("userId").s(), attributeMap.get("email").s());
+		return User.builder()
+				   .userId(attributeMap.get("userId").s())
+				   .email(attributeMap.get("email").s())
+				   .build();
 	}
 
 	static Map<String, AttributeValue> toMap(User user) {

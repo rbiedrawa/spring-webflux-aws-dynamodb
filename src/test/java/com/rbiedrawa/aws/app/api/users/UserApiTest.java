@@ -1,9 +1,10 @@
-package com.rbiedrawa.aws.app;
+package com.rbiedrawa.aws.app.api.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import com.rbiedrawa.aws.app.users.User;
+import com.rbiedrawa.aws.app.IntegrationTest;
+import com.rbiedrawa.aws.app.domain.users.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import software.amazon.awssdk.services.dynamodb.model.KeyType;
 import software.amazon.awssdk.services.dynamodb.model.ProvisionedThroughput;
 import software.amazon.awssdk.services.dynamodb.model.ResourceInUseException;
 
-class ApplicationTest extends IntegrationTest {
+class UserApiTest extends IntegrationTest {
 
 	@Autowired
 	private DynamoDbAsyncClient dDB;
@@ -46,7 +47,6 @@ class ApplicationTest extends IntegrationTest {
 			.expectBody()
 			.jsonPath("$.userId").isNotEmpty()
 			.jsonPath("$.email").isEqualTo(user.getEmail());
-
 	}
 
 

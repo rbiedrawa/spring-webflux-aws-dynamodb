@@ -1,4 +1,4 @@
-package com.rbiedrawa.aws.app.users;
+package com.rbiedrawa.aws.app.domain.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Builder
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class User {
 	private String userId;
 	private String email;

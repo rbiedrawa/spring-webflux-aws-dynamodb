@@ -1,4 +1,4 @@
-package com.rbiedrawa.aws.app.config;
+package com.rbiedrawa.aws.app.spi.dynamodb.config;
 
 import java.net.URI;
 
