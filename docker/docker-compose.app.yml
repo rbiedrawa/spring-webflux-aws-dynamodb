@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    image: com.rbiedrawa.aws/spring-webflux-aws-dynamodb:0.0.1-SNAPSHOT
+    container_name: app
+    restart: always
+    depends_on:
+      - dynamodb
+    ports:
+      - 8080:8080
+    environment:
+      spring.profiles.active: docker
+      app.aws.dynamodb.endpoint: "http://dynamodb:8000"
+      AWS_ACCESS_KEY_ID: 'DUMMYIDEXAMPLE'
+      AWS_SECRET_ACCESS_KEY: 'DUMMYEXAMPLEKEY'
+      AWS_DEFAULT_REGION: 'eu-west-1'

@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.rbiedrawa'
+group = 'com.rbiedrawa.aws'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -43,4 +43,8 @@ dependencyManagement {
 
 test {
 	useJUnitPlatform()
+}
+
+bootBuildImage {
+	imageName = "${project.group}/${project.name}:${project.version}"
 }
