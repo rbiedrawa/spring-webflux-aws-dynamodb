@@ -1,4 +1,4 @@
-# Amazon DynamoDB CRUD application with Spring Webflux
+# Spring Webflux CRUD application (Amazon DynamoDB)
 
 This repository contains sample Aws DynamoDB CRUD application with Spring Webflux and TestContainers integration.
 
