@@ -11,7 +11,7 @@ This repository contains sample Aws DynamoDB CRUD application with Spring Webflu
 
 ## Getting Started
 
-### Prerequisite
+### Prerequisites
 
 * Java 11
 * Docker
